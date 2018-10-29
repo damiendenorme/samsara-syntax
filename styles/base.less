@@ -1,5 +1,8 @@
 @import "syntax-variables";
 
+
+
+//=== Atom editor style ================================================================================================
 atom-text-editor {
   background-color: @syntax-background-color;
   color: @syntax-text-color;
@@ -21,9 +24,12 @@ atom-text-editor {
     color: @syntax-gutter-text-color;
 
     .line-number {
-      &.cursor-line {
+      &.cursor-line,
+      &.bracket-matcher,
+       {
         background-color: @syntax-gutter-background-color-selected;
         color: @syntax-gutter-text-color-selected;
+        font-weight: bold;
       }
 
       &.cursor-line-no-selection {
@@ -52,98 +58,133 @@ atom-text-editor {
 }
 
 
-// Syntax styles
 
-.syntax--comment {
+//=== Generic code style ===============================================================================================
+.syntax--comment,
+.syntax--comment.syntax--punctuation {
   color: @blue;
 }
 
-.syntax--keyword {
-  color: @syntax-primary;
-
-  &.syntax--control {
-    color: @syntax-primary;
-  }
-
-  &.syntax--operator {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--other.syntax--special-method {
-    color: @syntax-primary;
-  }
-
-  &.syntax--other.syntax--unit {
-    color: @syntax-secondary;
-  }
-}
-
-.syntax--storage {
-  color: @syntax-primary;
-}
-
-.syntax--constant {
-  color: @syntax-text-color;
-
-  &.syntax--character.syntax--escape {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--numeric {
-    color: @syntax-secondary;
-  }
-
-  &.syntax--other.syntax--color {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--other.syntax--symbol {
-    color: @syntax-text-color;
-  }
-}
-
+.syntax--string,
 .syntax--variable {
-  color: @light-gray;
-
-  &.syntax--interpolation {
-    color: darken(@red, 10%);
-  }
-
-  &.syntax--parameter.syntax--function {
-    color: @very-light-gray;
-  }
-
-  &.syntax--parameter {
-    color: @very-light-gray;
-    font-weight: bolder;
-  }
-}
-
-.syntax--invalid.syntax--illegal {
-  background-color: @red;
-  color: @syntax-background-color;
-}
-
-.syntax--string {
   color: @syntax-secondary;
+}
 
 
-  &.syntax--regexp {
+
+//=== JSON code style ==================================================================================================
+.syntax--json {
+  &.syntax--key > .syntax--string,
+  &.syntax--punctuation.syntax--definition,
+  &.syntax--punctuation {
+    color: @syntax-text-color;
+  }
+
+  &.syntax--string {
     color: @syntax-secondary;
+  }
+}
 
-    .syntax--source.syntax--ruby.syntax--embedded {
+
+
+//=== CSS family code style ============================================================================================
+.syntax--css,
+.syntax--less,
+.syntax--scss {
+  &.syntax--definition.syntax--punctuation:not(.syntax--comment) {
+    color: @syntax-text-color;
+  }
+
+  &.syntax--constant {
+    color: @syntax-secondary;
+  }
+}
+
+
+
+//=== Javascript family code style =====================================================================================
+.syntax--ts,
+.syntax--tsx,
+.syntax--js,
+.syntax--jsx, {
+  &.syntax--keyword {
+    color: @syntax-primary;
+
+    &.syntax--control {
+      color: @syntax-primary;
+    }
+
+    &.syntax--operator {
+      color: @syntax-text-color;
+    }
+
+    &.syntax--other.syntax--special-method {
+      color: @syntax-primary;
+    }
+
+    &.syntax--other.syntax--unit {
       color: @syntax-secondary;
     }
   }
 
-  &.syntax--other.syntax--link {
-    color: @red;
-  }
-}
-
-.syntax--punctuation {
-  &.syntax--decorator {
+  &.syntax--storage {
     color: @syntax-primary;
+  }
+
+  &.syntax--constant {
+    color: @syntax-text-color;
+
+    &.syntax--character.syntax--escape {
+      color: @syntax-text-color;
+    }
+
+    &.syntax--numeric {
+      color: @syntax-secondary;
+    }
+
+    &.syntax--other.syntax--color {
+      color: @syntax-text-color;
+    }
+
+    &.syntax--other.syntax--symbol {
+      color: @syntax-text-color;
+    }
+  }
+
+  &.syntax--variable {
+    color: @light-gray;
+
+    &.syntax--interpolation {
+      color: darken(@red, 10%);
+    }
+
+    &.syntax--parameter.syntax--function {
+      color: @very-light-gray;
+    }
+
+    &.syntax--parameter {
+      color: @very-light-gray;
+      font-weight: bolder;
+    }
+  }
+
+  &.syntax--invalid.syntax--illegal {
+    background-color: @red;
+    color: @syntax-background-color;
+  }
+
+  &.syntax--string {
+    &.syntax--regexp {
+      color: @syntax-secondary;
+
+      .syntax--source.syntax--ruby.syntax--embedded {
+        color: @syntax-secondary;
+      }
+    }
+
+    &.syntax--other.syntax--link {
+      color: @red;
+    }
   }
 
   &.syntax--definition {
@@ -184,7 +225,6 @@ atom-text-editor {
   &.syntax--section.syntax--embedded {
     color: @syntax-primary;
   }
-
 }
 
 .syntax--support {
@@ -192,19 +232,13 @@ atom-text-editor {
     color: @syntax-secondary;
   }
 
-  &.syntax--function  {
-    color: @syntax-text-color;
-
-    &.syntax--any-method {
-      color: @blue;
-    }
+  &.syntax--function.syntax--any-method {
+    color: @blue;
   }
 
-  &.syntax--type  {
-    &.syntax--primitive {
-      color: @syntax-text-color;
-      font-style: italic;
-    }
+  &.syntax--type.syntax--primitive {
+    color: @syntax-text-color;
+    font-style: italic;
   }
 }
 
@@ -346,8 +380,8 @@ atom-text-editor {
 }
 
 
-// Mini editor
 
+//=== Mini editor ======================================================================================================
 atom-text-editor[mini] .scroll-view {
   padding-left: 1px;
 }
