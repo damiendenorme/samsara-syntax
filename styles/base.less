@@ -41,7 +41,7 @@ atom-text-editor {
   .gutter .line-number.folded,
   .gutter .line-number:after,
   .fold-marker:after {
-    color: @light-gray;
+    color: @syntax-text-color;
   }
 
   .invisible {
@@ -70,18 +70,38 @@ atom-text-editor {
   color: @syntax-secondary;
 }
 
+.syntax--name.syntax--tag {
+  color: @syntax-ternary;
+  font-weight: bold;
+
+  &.syntax--custom {
+    font-weight: normal;
+    font-style: italic;
+  }
+}
+
 
 
 //=== JSON code style ==================================================================================================
 .syntax--json {
-  &.syntax--key > .syntax--string,
-  &.syntax--punctuation.syntax--definition,
-  &.syntax--punctuation {
+  &.syntax--dictionary.syntax--key > .syntax--string > .syntax--punctuation,
+  &.syntax--dictionary.syntax--key > .syntax--string {
     color: @syntax-text-color;
   }
 
-  &.syntax--string {
+  &.syntax--dictionary.syntax--value > .syntax--string {
     color: @syntax-secondary;
+  }
+
+  // TODO: change the color of the first level attributes keys to @syntax-ternary
+}
+
+
+
+//=== HTML family code style ===========================================================================================
+.syntax--html {
+  .syntax--entity.syntax--other.syntax--attribute-name {
+    color: @syntax-primary;
   }
 }
 
@@ -100,6 +120,15 @@ atom-text-editor {
   }
 }
 
+&.syntax--other.syntax--attribute-name {
+  color: @syntax-text-color;
+
+  &.syntax--id,
+  &.syntax--class {
+    color: @syntax-primary;
+  }
+}
+
 
 
 //=== Javascript family code style =====================================================================================
@@ -107,7 +136,11 @@ atom-text-editor {
 .syntax--tsx,
 .syntax--js,
 .syntax--jsx, {
-  &.syntax--keyword {
+  .syntax--property {
+    color: @syntax-text-color;
+  }
+
+  .syntax--keyword {
     color: @syntax-primary;
 
     &.syntax--control {
@@ -117,265 +150,41 @@ atom-text-editor {
     &.syntax--operator {
       color: @syntax-text-color;
     }
-
-    &.syntax--other.syntax--special-method {
-      color: @syntax-primary;
-    }
-
-    &.syntax--other.syntax--unit {
-      color: @syntax-secondary;
-    }
   }
 
-  &.syntax--storage {
+  .syntax--storage {
     color: @syntax-primary;
   }
 
-  &.syntax--constant {
-    color: @syntax-text-color;
-
-    &.syntax--character.syntax--escape {
-      color: @syntax-text-color;
-    }
-
-    &.syntax--numeric {
-      color: @syntax-secondary;
-    }
-
-    &.syntax--other.syntax--color {
-      color: @syntax-text-color;
-    }
-
-    &.syntax--other.syntax--symbol {
-      color: @syntax-text-color;
-    }
-  }
-
-  &.syntax--variable {
-    color: @light-gray;
-
-    &.syntax--interpolation {
-      color: darken(@red, 10%);
-    }
-
-    &.syntax--parameter.syntax--function {
-      color: @very-light-gray;
-    }
-
-    &.syntax--parameter {
-      color: @very-light-gray;
-      font-weight: bolder;
-    }
-  }
-
-  &.syntax--invalid.syntax--illegal {
-    background-color: @red;
-    color: @syntax-background-color;
-  }
-
-  &.syntax--string {
-    &.syntax--regexp {
-      color: @syntax-secondary;
-
-      .syntax--source.syntax--ruby.syntax--embedded {
-        color: @syntax-secondary;
-      }
-    }
-
-    &.syntax--other.syntax--link {
-      color: @red;
-    }
-  }
-
-  &.syntax--definition {
-    &.syntax--comment {
-      color: @blue;
-    }
-
-    &.syntax--string {
-      &.syntax--begin,
-      &.syntax--end {
-        color: @syntax-text-color;
-      }
-    }
-
-    &.syntax--string,
-    &.syntax--variable,
-    &.syntax--parameters,
-    &.syntax--array {
-      color: @syntax-primary;
-    }
-
-    &.syntax--heading,
-    &.syntax--identity {
-      color: @syntax-primary;
-    }
-
-    &.syntax--bold {
-      color: @syntax-primary;
-      font-weight: bold;
-    }
-
-    &.syntax--italic {
-      color: @syntax-primary;
-      font-style: italic;
-    }
-  }
-
-  &.syntax--section.syntax--embedded {
-    color: @syntax-primary;
-  }
-}
-
-.syntax--support {
-  &.syntax--class {
+  .syntax--numeric {
     color: @syntax-secondary;
   }
 
-  &.syntax--function.syntax--any-method {
-    color: @blue;
-  }
-
-  &.syntax--type.syntax--primitive {
-    color: @syntax-text-color;
-    font-style: italic;
-  }
-}
-
-.syntax--entity {
-  &.syntax--name.syntax--function {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--name.syntax--type {
-    color: @syntax-text-color;
-    font-style: italic;
-  }
-
-  &.syntax--other.syntax--inherited-class {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--name.syntax--class, &.syntax--name.syntax--type.syntax--class {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--name.syntax--section {
-    color: @syntax-text-color;
-  }
-
-  &.syntax--name.syntax--tag {
-    color: white;
-    font-weight: bold;
-
-    &.syntax--custom {
-      font-weight: normal;
-      font-style: italic;
-    }
-
-  }
-
-  &.syntax--other.syntax--attribute-name {
-    color: @syntax-text-color;
+  // Next rule is for a source--js or a .source--jsx
+  .syntax--other.syntax--attribute-name {
+    color: @syntax-primary;
 
     &.syntax--id,
     &.syntax--class {
       color: @syntax-primary;
     }
   }
-}
 
-.syntax--meta {
-  &.syntax--definition {
-    &.syntax--property {
-      color: @very-light-gray;
-      font-weight: bold;
-    }
-
-    &.syntax--method {
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    &.syntax--variable {
-      color: @very-light-gray;
-      font-weight: bold;
+  .syntax--support {
+    &.syntax--type {
+      color: @syntax-ternary;
+      font-style: italic;
     }
   }
 
-  &.syntax--class {
-    color: @syntax-primary;
+  .syntax--meta {
+    &.syntax--class {
+      color: @syntax-ternary;
+    }
   }
 
-  &.syntax--link {
-    color: @syntax-secondary;
-  }
-
-  &.syntax--require {
-    color: @blue;
-  }
-
-  &.syntax--selector {
-    color: @purple;
-  }
-
-  &.syntax--separator {
+  .syntax--none {
     color: @syntax-text-color;
-  }
-
-  &.syntax--object-literal {
-    color: @very-light-gray;
-  }
-}
-
-.syntax--none {
-  color: @syntax-text-color;
-}
-
-.syntax--markup {
-  &.syntax--bold {
-    color: @syntax-secondary;
-    font-weight: bold;
-  }
-
-  &.syntax--changed {
-    color: @purple;
-  }
-
-  &.syntax--deleted {
-    color: @red;
-  }
-
-  &.syntax--italic {
-    color: @purple;
-    font-style: italic;
-  }
-
-  &.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
-    color: @blue;
-  }
-
-  &.syntax--inserted {
-    color: @syntax-primary;
-  }
-
-  &.syntax--list {
-    color: @red;
-  }
-
-  &.syntax--quote {
-    color: @syntax-secondary;
-  }
-
-  &.syntax--raw.syntax--inline {
-    color: @syntax-primary;
-  }
-}
-
-.syntax--source.syntax--gfm .syntax--markup {
-  -webkit-font-smoothing: auto;
-  &.syntax--heading {
-    color: @syntax-primary;
   }
 }
 
