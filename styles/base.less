@@ -65,6 +65,10 @@ atom-text-editor {
   color: @blue;
 }
 
+.syntax-keyword.syntax-operator.syntax--new {
+  color: @syntax-primary;
+}
+
 .syntax--string,
 .syntax--variable,
 .syntax--null,
@@ -134,7 +138,6 @@ atom-text-editor {
 
 //=== Javascript family code style =====================================================================================
 .syntax--ts,
-
 .syntax--tsx,
 .syntax--js,
 .syntax--jsx, {
@@ -149,7 +152,7 @@ atom-text-editor {
       color: @syntax-primary;
     }
 
-    &.syntax--operator {
+    &.syntax--operator:not(.syntax--new) {
       color: @syntax-text-color;
     }
   }
