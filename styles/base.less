@@ -146,6 +146,12 @@ atom-text-editor {
     color: @syntax-text-color;
   }
 
+  .syntax--numeric,
+  .syntax--boolean,
+  .syntax--regexp .syntax--keyword, {
+    color: @syntax-secondary !important; // !important needed because of priority issues
+  }
+
   .syntax--keyword {
     color: @syntax-primary;
 
@@ -162,10 +168,6 @@ atom-text-editor {
     color: @syntax-primary;
   }
 
-  .syntax--numeric,
-  .syntax--boolean {
-    color: @syntax-secondary;
-  }
 
   // Next rule is for a source--js or a .source--jsx
   .syntax--other.syntax--attribute-name {
