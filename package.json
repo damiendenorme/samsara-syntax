@@ -1,13 +1,13 @@
 {
   "name": "samsara-syntax",
   "theme": "syntax",
-  "version": "0.0.0",
-  "description": "Code is universal. Coloration is personal. Stay universal.",
+  "version": "0.1.0",
+  "description": "Code is universal. Coloration is personal. Keep it universal.",
   "keywords": [
     "syntax",
     "theme"
   ],
-  "repository": "https://github.com/atom/samsara-syntax",
+  "repository": "https://github.com/damiendenorme/samsara-syntax",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
